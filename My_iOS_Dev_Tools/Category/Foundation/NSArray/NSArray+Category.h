@@ -13,6 +13,7 @@
  */
 @interface NSArray (Category)
 
+- (BOOL)isValidate;
 - (id)firstObject;
 - (id)lastObject;
 - (id)objectAtIndexNotBeyond:(NSUInteger)index;

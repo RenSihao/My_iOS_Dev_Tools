@@ -10,19 +10,13 @@
 
 @interface NSString (Category)
 
-/**判断字符串是否为空，如果字符串为空格也会判断为空
- */
+//判断字符串是否为空,字符串不可以为空格
 + (BOOL)isEmpty:(NSString*)str;
 
-/**判断字符串是否为空,字符串可以为空格
- */
+//判断字符串是否为空,字符串可以为空格
 + (BOOL)isNull:(NSString*)str;
 
-/**
- *  判断字符串是否合法有值
- *
- *  @return
- */
+//判断字符串是否合法有值
 - (BOOL)isValid;
 
 /**中文编码

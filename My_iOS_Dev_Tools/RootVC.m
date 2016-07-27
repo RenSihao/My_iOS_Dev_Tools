@@ -21,14 +21,7 @@
     
     self.title = @"我的iOS开发工具包";
     
-    _sectionTitles = @[@"", ];
     
-    [UIFont fontWithName:MainFontName size:10];
-    
-    if (isValidateString(@""))
-    {
-        
-    }
 }
 
 @end

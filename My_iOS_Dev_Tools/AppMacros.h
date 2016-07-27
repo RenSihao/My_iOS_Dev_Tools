@@ -8,19 +8,22 @@
 
 
 /**
- *  AppMacros 是APP常用宏定义文件，宏定义一般用来定义代码行为
+ *  AppMacros 是APP常用宏定义文件，宏定义一般用来定义代码行为（众所周知，项目里我们尽可能不去用宏 -。-）
  */
 
 #ifndef AppMacros_h
 #define AppMacros_h
 
-
+//self弱引用
 #define WeakSelf(parameter)   typeof(self) __weak   weakSelf   = parameter;
+
+//self强引用
 #define StrongSelf(parameter) typeof(self) __strong strongSelf = parameter;
 
 
-#define IsEmpty(parameter) !(parameter && parameter.length>0)
-#define IsNull(parameter)   [parameter isKindOfClass:[NSNull class]]
+#pragma mark - 颜色
+
+#pragma mark - 图片
 
 
 

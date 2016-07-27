@@ -13,9 +13,18 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+/**
+ *  本项目中，约定术语解释
+ *  Base代表基类、基础、全局、通用、主要、通常、默认（相当于Global、General等前缀）
+ *
+ *  tips：
+ *  颜色全部以十六进制为统一单位
+ *  通知全部以Notification结尾
+ *  
+ */
+
 
 #pragma mark - Framework
-
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
@@ -30,13 +39,36 @@
 #import "AppConsts.h"
 
 
+
+#pragma mark - Founctions
+#import "AppFunctions.h"
+
+
+
 #pragma mark - Category
 
+/* Foundation */
 
+#import "NSArray+Category.h"
+#import "NSDictionary+Category.h"
+#import "NSString+Category.h"
+#import "NSAttributedString+Category.h"
 
+#import "NSMutableArray+Category.h"
+#import "NSMutableDictionary+Category.h"
+#import "NSMutableString+Category.h"
+#import "NSMutableAttributedString+Category.h"
 
+#import "NSDate+Category.h"
 
+#import "NSJSONSerialization+Category.h"
 
+#import "NSNumber+Category.h"
+
+/* UIKit */
+
+#import "UIColor+Category.h"
+#import "UIImage+Category.h"
 
 
 

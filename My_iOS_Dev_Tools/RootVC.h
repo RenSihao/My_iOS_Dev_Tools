@@ -6,8 +6,8 @@
 //  Copyright © 2016年 RenSihao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface RootVC : UIViewController
+@interface RootVC : BaseViewController
 
 @end

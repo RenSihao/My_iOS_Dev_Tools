@@ -11,15 +11,15 @@
 /**
  *  导航条按钮位置
  */
-typedef NS_ENUM(NSInteger, SeaNavigationItemPosition) {
+typedef NS_ENUM(NSInteger, BaseNavigationItemPosition) {
     /**
      *  左边
      */
-    SeaNavigationItemPositionLeft  = 0,
+    BaseNavigationItemPositionLeft  = 0,
     /**
      *  右边
      */
-    SeaNavigationItemPositionRight = 1 
+    BaseNavigationItemPositionRight = 1
 };
 
 @interface UIViewController (Category)
@@ -37,7 +37,36 @@ typedef NS_ENUM(NSInteger, SeaNavigationItemPosition) {
 - (void)disMissAlertView;
 
 
-#pragma mark - 
+#pragma mark - readonly property 
+
+/**
+ *  获取状态栏高度
+ *
+ *  @return
+ */
+- (CGFloat)statusBarHeight;
+
+/**
+ *  获取NavigationBar高度
+ *
+ *  @return
+ */
+- (CGFloat)navigationBarHeight;
+
+/**
+ *  获取TabBar高度
+ *
+ *  @return
+ */
+- (CGFloat)tabBarHeight;
+
+/**
+ *  获取可显示内容高度
+ *
+ *  @return
+ */
+- (CGFloat)contentHeight;
+
 
 /**设置返回按钮
  */
@@ -158,31 +187,31 @@ typedef NS_ENUM(NSInteger, SeaNavigationItemPosition) {
  *@param action 按钮点击方法
  *@param position 按钮位置
  */
-- (void)setBarItemsWithTitle:(NSString*) title icon:(UIImage*) icon action:(SEL) action position:(SeaNavigationItemPosition) position;
-
-/**通过系统barButtonItem 设置导航条左边按钮
- *@param style 系统barButtonItem 样式
- *@param action 按钮点击方法
- *@param position 按钮位置
- */
-- (void)setBarItemsWithStyle:(UIBarButtonSystemItem) style action:(SEL) action position:(SeaNavigationItemPosition) position;
-
-/**通过自定的按钮类型 设置导航条左边按钮
- *@param buttonType 自定义按钮类型
- *@param action 按钮点击方法
- *@param position 按钮位置
- */
-//- (void)setBarItemWithButtonType:(SeaButtonType) buttonType action:(SEL) action position:(SeaNavigationItemPosition) position;
-
-/**通过自定义视图 设置导航条右边按钮
- *@param customView 自定义视图
- */
-- (void)setBarItemWithCustomView:(UIView*) customView position:(SeaNavigationItemPosition) position;
-
-/**设置dismiss 按钮
- *@param position 按钮位置
- */
-- (void)setDismissBarItemWithPosition:(SeaNavigationItemPosition) position;
+//- (void)setBarItemsWithTitle:(NSString*) title icon:(UIImage*) icon action:(SEL) action position:(SeaNavigationItemPosition) position;
+//
+///**通过系统barButtonItem 设置导航条左边按钮
+// *@param style 系统barButtonItem 样式
+// *@param action 按钮点击方法
+// *@param position 按钮位置
+// */
+//- (void)setBarItemsWithStyle:(UIBarButtonSystemItem) style action:(SEL) action position:(SeaNavigationItemPosition) position;
+//
+///**通过自定的按钮类型 设置导航条左边按钮
+// *@param buttonType 自定义按钮类型
+// *@param action 按钮点击方法
+// *@param position 按钮位置
+// */
+////- (void)setBarItemWithButtonType:(SeaButtonType) buttonType action:(SEL) action position:(SeaNavigationItemPosition) position;
+//
+///**通过自定义视图 设置导航条右边按钮
+// *@param customView 自定义视图
+// */
+//- (void)setBarItemWithCustomView:(UIView*) customView position:(SeaNavigationItemPosition) position;
+//
+///**设置dismiss 按钮
+// *@param position 按钮位置
+// */
+//- (void)setDismissBarItemWithPosition:(SeaNavigationItemPosition) position;
 
 /**设置导航条样式 默认不透明
  *@param backgroundColor 背景颜色
