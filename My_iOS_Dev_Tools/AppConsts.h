@@ -6,22 +6,33 @@
 //  Copyright © 2016年 RenSihao. All rights reserved.
 //
 
+/**
+ *  本类包含了项目中开发用到的几乎所有常量，具体详情一看便知 -。-
+ */
 
 #pragma mark - 字体
 
-UIKIT_EXTERN NSString * const MainFontName;
-UIKIT_EXTERN NSString * const MainNumberFontName;
-UIKIT_EXTERN NSString * const MainEnglishFontName;
+UIKIT_EXTERN NSString * const BaseFontName;
+UIKIT_EXTERN NSString * const BaseNumberFontName;
+UIKIT_EXTERN NSString * const BaseEnglishFontName;
 
 
-#pragma mark - 颜色
+#pragma mark - 颜色 (Hex)
 
-
-
+UIKIT_EXTERN NSString * const BaseViewColor;
+UIKIT_EXTERN NSString * const BaseTableViewColor;
+UIKIT_EXTERN NSString * const BaseNavBarTintColor;
+UIKIT_EXTERN NSString * const BaseTabBarTintColor;
 
 #pragma mark - 尺寸
 
+UIKIT_EXTERN CGFloat const BaseNavBarHeight;
+UIKIT_EXTERN CGFloat const BaseTabBarHeight;
 
+
+#pragma mark - 图片
+
+UIKIT_EXTERN NSString * const BasePlaceholderImage;
 
 #pragma mark - 时间
 
@@ -32,22 +43,10 @@ UIKIT_EXTERN NSString * const MainEnglishFontName;
 
 #pragma mark - 通知
 
+#pragma mark - 关键Key
 
+UIKIT_EXTERN NSString * const BaseDeviceTokenKey;
 
-#pragma mark - 函数
-
-
-UIKIT_EXTERN NSString *appName();
-
-UIKIT_EXTERN NSString *appVersion();
-
-UIKIT_EXTERN BOOL isValidateString(NSString *string);
-
-UIKIT_EXTERN void registerRemoteNotification();
-
-UIKIT_EXTERN void unregisterRemoteNotification();
-
-UIKIT_EXTERN void openSystemSettings();
 
 
 

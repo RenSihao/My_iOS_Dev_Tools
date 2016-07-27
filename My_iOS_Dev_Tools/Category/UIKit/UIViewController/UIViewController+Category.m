@@ -9,6 +9,7 @@
 #import "UIViewController+Category.h"
 #import <objc/runtime.h>
 
+
 /**objc rutime 属性，key **/
 
 /**状态栏隐藏
@@ -178,6 +179,48 @@ static char SeaHideTabBarKey;
 //{
 ////    return objc_getAssociatedObject(self, &SeaHasNoMsgViewkey);
 //}
+
+
+#pragma mark - readonly property
+
+- (CGFloat)statusBarHeight
+{
+    return [UIApplication sharedApplication].statusBarFrame.size.height;
+}
+
+- (CGFloat)navigationBarHeight
+{
+    if (self.navigationController.navigationBarHidden)
+    {
+        return 0.f;
+    }
+    else
+    {
+        return BaseNavBarHeight;
+    }
+}
+- (CGFloat)tabBarHeight
+{
+    if (self.tabBarController.tabBar.isHidden)
+    {
+        return 0.f;
+    }
+    else
+    {
+        return BaseTabBarHeight;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark- back
 

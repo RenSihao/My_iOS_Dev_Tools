@@ -26,6 +26,8 @@ typedef NS_ENUM(NSInteger, SeaAssetImageOptions)
 
 @interface UIImage (Category)
 
+
+
 #pragma mark- init
 
 /**图片初始化 png格式 使用initWithContentsOfFile

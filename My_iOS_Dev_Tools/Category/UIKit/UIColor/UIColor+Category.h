@@ -75,6 +75,24 @@ typedef struct
  */
 + (UIColor*)colorWithR:(int) r G:(int) g B:(int) b a:(CGFloat) a;
 
+#pragma mark - random
+
 + (UIColor *)randomColor;
+
+#pragma mark - Hex
+
++ (UIColor *)colorWithHex:(UInt32)hex;
++ (UIColor *)colorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha;
++ (UIColor *)colorWithHexString:(NSString *)hexString;
+- (NSString *)HEXString;
+
++ (UIColor *)colorWithWholeRed:(CGFloat)red
+                         green:(CGFloat)green
+                          blue:(CGFloat)blue
+                         alpha:(CGFloat)alpha;
+
++ (UIColor *)colorWithWholeRed:(CGFloat)red
+                         green:(CGFloat)green
+                          blue:(CGFloat)blue;
 
 @end

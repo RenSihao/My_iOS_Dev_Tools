@@ -9,54 +9,45 @@
 #import "NSString+Category.h"
 #import <CommonCrypto/CommonCrypto.h>
 
+
 @implementation NSString (Category)
 
-//判断字符串是否为空
+//static BOOL IsNullOrNil(id value)
+//{
+//    if ([value isKindOfClass:[NSNull class]] || value ==nil || [value isEqual:[NSNull null]] || value == NULL)
+//    {
+//        return YES;
+//    }
+//    return NO;
+//}
+
+//判断字符串是否为空,字符串不可以为空格
 + (BOOL)isEmpty:(NSString *)str
 {
-    if([str isEqual:[NSNull null]])
+    if (IsNullOrNil(str))
     {
         return YES;
     }
-    
-    if(str == nil)
-    {
-        return YES;
-    }
-    
-    if(str == NULL)
-    {
-        return YES;
-    }
-    
     if([str stringByReplacingOccurrencesOfString:@" " withString:@""].length == 0)
     {
         return YES;
     }
+    
     return NO;
 }
 
-/**判断字符串是否为空,字符串可以为空格
- */
+//判断字符串是否为空,字符串可以为空格
 + (BOOL)isNull:(NSString *)str
 {
-    if([str isEqual:[NSNull null]])
-    {
-        return YES;
-    }
-    
-    if(str == nil)
-    {
-        return YES;
-    }
-    
-    if(str == NULL)
+    if (IsNullOrNil(str))
     {
         return YES;
     }
     
     if(str.length == 0)
+    {
         return YES;
+    }
     
     return NO;
 }
@@ -67,10 +58,8 @@
     {
         return NO;
     }
-    else
-    {
-        return YES;
-    }
+    
+    return YES;
 }
 
 //中文编码
