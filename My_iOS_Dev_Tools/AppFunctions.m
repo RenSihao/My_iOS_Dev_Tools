@@ -73,6 +73,35 @@ void unregisterRemoteNotification()
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 }
 
+#pragma mark - 合法性检测工具，防止Crash
+//检测字符串、数组、字典、数字，是否合法、有效、有值、有意义
+BOOL IsValidateObject(id object)
+{
+    if (IsNullOrNil(object)) return NO;
+    
+    if ([object isKindOfClass:[NSString class]] && IsValidateString(object))
+    {
+        return YES;
+    }
+    
+    if ([object isKindOfClass:[NSArray class]] && IsValidateArray(object))
+    {
+        return YES;
+    }
+    
+    if ([object isKindOfClass:[NSDictionary class]] && IsValidateDic(object))
+    {
+        return YES;
+    }
+    
+    if ([object isKindOfClass:[NSNumber class]] && IsValidateNumber(object))
+    {
+        return YES;
+    }
+    
+    NSLog(@"该OC对象异常！");
+    return NO;
+}
 //检测对象是否为NULL 或者 nil 或者 NSNull
 BOOL IsNullOrNil(id value)
 {
@@ -84,7 +113,7 @@ BOOL IsNullOrNil(id value)
 }
 
 //字符串是否有值
-BOOL isValidateString(NSString *string)
+BOOL IsValidateString(NSString *string)
 {
     if (!string)             return NO;
     if (!(string.length>0))  return NO;
@@ -97,19 +126,25 @@ BOOL isValidateString(NSString *string)
     return YES;
 }
 //NSNumber是否有效
-BOOL isValidateNumber(NSNumber *number)
+BOOL IsValidateNumber(NSNumber *number)
 {
     return [number isValidate];
 }
 //数组是否有元素
-BOOL isValidateArray(NSArray *array)
+BOOL IsValidateArray(NSArray *array)
 {
     return [array isValidate];
 }
 //字典是否有键值对
-BOOL isValidateDic(NSDictionary *dic)
+BOOL IsValidateDic(NSDictionary *dic)
 {
     return [dic isValidate];
+}
+//程序执行对象合法性断言
+void AppAssert(id value, id cls, NSString *crashMessage)
+{
+    NSCAssert(IsValidateObject(value), @"崩溃文件：%@ \n 崩溃原因：%@ ",
+              NSStringFromClass([cls class]), IsValidateString(crashMessage) ? crashMessage : @"不能为nil！");
 }
 
 //打开系统设置
@@ -122,6 +157,7 @@ void openSystemSettings()
     }
 }
 
+#pragma mark - 颜色工具
 //根据十六进制String获取颜色
 UIColor *AppHexColor(NSString *hexString)
 {
@@ -134,9 +170,26 @@ UIColor *AppRGBColor(NSInteger r, NSInteger g, NSInteger b)
     return [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:1.f];
 }
 
-
+#pragma mark - 图片工具
 //根据图片名字获取对应图片
 UIImage *AppImage(NSString *imageName)
 {
     return [UIImage imageNamed:imageName] ? : [UIImage imageNamed:BasePlaceholderImage];
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

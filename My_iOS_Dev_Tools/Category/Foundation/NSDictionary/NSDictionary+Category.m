@@ -82,26 +82,26 @@
     return nil;
 }
 
-- (NSDecimalNumber *)decimalNumberForKey:(id)key
-{
-    id value = [self objectForKey:key];
-    
-    if ([value isKindOfClass:[NSDecimalNumber class]])
-    {
-        return (NSDecimalNumber *)value;
-    }
-    if ([value isKindOfClass:[NSNumber class]])
-    {
-        NSNumber *number = (NSNumber *)value;
-        return [NSDecimalNumber decimalNumberWithDecimal:[number decimalValue]];
-    }
-    if ([value isKindOfClass:[NSString class]])
-    {
-        NSString *str = (NSString *)value;
-        return [str isEqualToString:@""] ? nil : [NSDecimalNumber decimalNumberWithString:str];
-    }
-    return nil;
-}
+//- (NSDecimalNumber *)decimalNumberForKey:(id)key
+//{
+//    id value = [self objectForKey:key];
+//    
+//    if ([value isKindOfClass:[NSDecimalNumber class]])
+//    {
+//        return (NSDecimalNumber *)value;
+//    }
+//    if ([value isKindOfClass:[NSNumber class]])
+//    {
+//        NSNumber *number = (NSNumber *)value;
+//        return [NSDecimalNumber decimalNumberWithDecimal:[number decimalValue]];
+//    }
+//    if ([value isKindOfClass:[NSString class]])
+//    {
+//        NSString *str = (NSString *)value;
+//        return [str isEqualToString:@""] ? nil : [NSDecimalNumber decimalNumberWithString:str];
+//    }
+//    return nil;
+//}
 
 - (NSArray *)arrayForKey:(id)key
 {

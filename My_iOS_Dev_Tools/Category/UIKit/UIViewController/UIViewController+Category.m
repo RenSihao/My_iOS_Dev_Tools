@@ -183,6 +183,11 @@ static char SeaHideTabBarKey;
 
 #pragma mark - readonly property
 
+- (BOOL)isVisible
+{
+    return ([self isViewLoaded] && self.view.window);
+}
+
 - (CGFloat)statusBarHeight
 {
     return [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -210,8 +215,16 @@ static char SeaHideTabBarKey;
         return BaseTabBarHeight;
     }
 }
-
-
+- (CGFloat)contentHeight
+{
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    return screenHeight - self.statusBarHeight - self.navigationBarHeight - self.tabBarHeight;
+}
+- (CGFloat)contentWidth
+{
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    return screenWidth;
+}
 
 
 

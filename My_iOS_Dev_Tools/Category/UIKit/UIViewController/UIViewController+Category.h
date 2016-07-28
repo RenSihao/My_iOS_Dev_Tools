@@ -40,6 +40,11 @@ typedef NS_ENUM(NSInteger, BaseNavigationItemPosition) {
 #pragma mark - readonly property 
 
 /**
+ *  是否有效可见
+ */
+- (BOOL)isVisible;
+
+/**
  *  获取状态栏高度
  *
  *  @return
@@ -66,6 +71,11 @@ typedef NS_ENUM(NSInteger, BaseNavigationItemPosition) {
  *  @return
  */
 - (CGFloat)contentHeight;
+
+/**
+ *  获取可显示内容宽度，默认就是屏幕宽度
+ */
+- (CGFloat)contentWidth;
 
 
 /**设置返回按钮

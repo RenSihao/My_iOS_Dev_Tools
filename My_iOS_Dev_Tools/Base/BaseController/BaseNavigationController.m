@@ -31,11 +31,11 @@
         
         //为导航栏添加背景图片，图片如果是44高，那么不覆盖状态栏，如果是64高就会覆盖状态栏
         //UIBarMetricsDefault 缺省值 UIBarMetricsCompact 横屏样式  UIBarMetricsDefaultPrompt和UIBarMetricsCompactPrompt是有promt的两种样式
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"m_nav64"] forBarMetrics:UIBarMetricsDefault];
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"m_nav64"] forBarMetrics:UIBarMetricsDefault];
         
         //定制返回按钮,这两个要一起用,为啥这么用，苹果言语不详
-        self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"m_ios"];
-        self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"m_ios"];
+//        self.navigationController.navigationBar.backIndicatorImage = [UIImage imageNamed:@"m_ios"];
+//        self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [UIImage imageNamed:@"m_ios"];
         
         //修改导航栏标题的字体
         NSShadow *shadow = [[NSShadow alloc] init];

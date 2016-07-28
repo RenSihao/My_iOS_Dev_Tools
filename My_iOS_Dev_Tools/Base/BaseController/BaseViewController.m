@@ -31,6 +31,7 @@
 
 #pragma mark - init
 
+//代码初始化
 - (instancetype)init
 {
     if (self = [super init])
@@ -39,6 +40,16 @@
     }
     return self;
 }
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        
+    }
+    return self;
+}
+//xib或者归档初始化
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
@@ -50,9 +61,19 @@
 
 #pragma mark - life cycle
 
+//通常第一次访问到view时会走此方法，目的：生成controller的view
+- (void)loadView
+{
+    [super loadView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    /**
+     *  tip： 与view相关的代码，尽可能放在viewDidLoad方法内，而不是init方法，否则容易有bug
+     */
     
     //1、添加通知
     [self addNotificationObservers];
@@ -107,15 +128,13 @@
     [self removeNotificationObservers];
 }
 
-#pragma mark - 初始化基本属性
+#pragma mark - 初始化
 
 /**
  *  初始化基本属性（非数据、非UI的东西，例如某些功能属性的设置...）
  */
 - (void)initialize
 {
-    self.view.backgroundColor = AppHexColor(BaseViewColor);
-    
     
 }
 /**
@@ -130,7 +149,7 @@
  */
 - (void)initializeUI
 {
-    
+    self.view.backgroundColor = AppHexColor(BaseViewColor);
 }
 /**
  *  初始化NavigationBar以及items相关属性，子类重写必须调用super
