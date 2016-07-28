@@ -20,7 +20,7 @@
 
 - (NSNumber *)numberForKey:(id)key;
 
-- (NSDecimalNumber *)decimalNumberForKey:(id)key;
+//- (NSDecimalNumber *)decimalNumberForKey:(id)key;
 
 - (NSArray *)arrayForKey:(id)key;
 

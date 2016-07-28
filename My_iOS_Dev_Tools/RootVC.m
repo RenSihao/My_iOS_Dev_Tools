@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"我的iOS开发工具包";
+//    self.title = @"我的iOS开发工具包";
     
     
 }

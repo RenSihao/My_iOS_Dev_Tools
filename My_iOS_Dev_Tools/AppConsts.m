@@ -16,10 +16,10 @@ NSString * const BaseEnglishFontName = @"Helvetica";
 
 
 #pragma mark - 颜色 (Hex)
-NSString * const BaseViewColor       = @"";
-NSString * const BaseTableViewColor  = @"";
-NSString * const BaseNavBarTintColor = @"";
-NSString * const BaseTabBarTintColor = @"";
+NSString * const BaseViewColor       = @"#fffaf0";
+NSString * const BaseTableViewColor  = @"#f8f8ff";
+NSString * const BaseNavBarTintColor = @"#00bfff";
+NSString * const BaseTabBarTintColor = @"#00bfff";
 
 
 

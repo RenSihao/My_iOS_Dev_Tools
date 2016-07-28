@@ -15,18 +15,28 @@
 
 /**
  *  本项目中，约定术语解释
- *  Base代表基类、基础、全局、通用、主要、通常、默认（相当于Global、General等前缀）
+ *  Base代表基类、基础、全局、通用、主要、通常、默认（相当于Global、General、Main等前缀）
  *
  *  tips：
- *  颜色全部以十六进制为统一单位
- *  通知全部以Notification结尾
+ *  pch文件苹果不推荐使用，个人认为pch是把双刃剑，控制好使用频率和波及范围
+ *  Total:5个模块
+ *  1、Framework（原生框架+三方） 2、AppMacros（宏） 3、AppConsts（常量） 4、Category（分类） 5、AppFounctions函数
  *  
+ *  颜色全部以十六进制为统一单位
+ *
+ *  通知全部以Notification结尾
+ *
+ *  YYKit是个好东西，多读源码，理解并擅用 -。-
  */
 
 
 #pragma mark - Framework
+
+/* 原生 */
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+
+/* 3rd  分为两种引用方式 一种是手动拖 一种是cocopods */
 
 
 
@@ -48,7 +58,6 @@
 #pragma mark - Category
 
 /* Foundation */
-
 #import "NSArray+Category.h"
 #import "NSDictionary+Category.h"
 #import "NSString+Category.h"
@@ -64,12 +73,12 @@
 #import "NSJSONSerialization+Category.h"
 
 #import "NSNumber+Category.h"
+//#import "NSDecimalNumber+Category.h"
 
 /* UIKit */
-
 #import "UIColor+Category.h"
 #import "UIImage+Category.h"
-
+#import "UIViewController+Category.h"
 
 
 
