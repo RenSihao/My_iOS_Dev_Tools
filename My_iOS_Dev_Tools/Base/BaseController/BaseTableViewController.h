@@ -7,61 +7,29 @@
 //
 
 #import "BaseViewController.h"
-#import "MJRefresh.h"
 
-/**
- *  tableView 风格
- */
-typedef NS_ENUM(NSInteger, BaseTableViewStyle) {
-    /**
-     *  系统的plain样式
-     */
-    BaseTableViewStyleSystemPlain,
-    /**
-     *  系统的grouped样式
-     */
-    BaseTableViewStyleSystemGrouped,
-    /**
-     *  不同APP各自独有的样式
-     */
-    BaseTableViewStyleBaseStyle
-};
+// vender
+#import "MJRefresh.h"
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 
 @interface BaseTableViewController : BaseViewController
 
-/**
- *  默认
- */
 @property (nonatomic, strong) UITableView *tableView;
-/**
- *  能否滑动，默认YES
- */
-@property (nonatomic, assign) BOOL enableScroll;
-/**
- *  是否具有下拉刷新功能，默认YES
- */
+
+// 默认 UITableViewStylePlain
+@property (nonatomic, assign) UITableViewStyle style;
+
+// 是否具有下拉刷新功能，默认YES
 @property (nonatomic, assign) BOOL enablePullDown;
-/**
- *  是否具有上拉加载功能，默认NO
- */
+
+// 是否具有上拉加载功能，默认NO
 @property (nonatomic, assign) BOOL enablePullUp;
 
-
-/**
- *  接口1：唯一对外初始化方法
- *
- *  @param style BaseTableViewStyle
- *
- *  @return BaseTableViewController
- */
-- (instancetype)initWithStyle:(BaseTableViewStyle)style;
-
-#pragma mark - 下拉刷新 && 上拉加载
-
+// 下拉刷新，子类重写即可
 - (void)beginPullDownRefresh;
+
+// 上拉加载，子类重写即可
 - (void)beginPullUpLoadMore;
-- (void)endPullDownRefresh;
-- (void)endPullUpLoadMore;
 
 
 

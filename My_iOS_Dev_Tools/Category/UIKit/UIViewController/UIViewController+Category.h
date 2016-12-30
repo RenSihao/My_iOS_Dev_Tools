@@ -25,57 +25,12 @@ typedef NS_ENUM(NSInteger, BaseNavigationItemPosition) {
 @interface UIViewController (Category)
 
 
-
-#pragma mark - HUD && AlertView
-
-- (void)showTextHud:(NSString*)message;
-- (void)showTextHudNoTab:(NSString*)message;
-- (void)showTextHud:(NSString*)message delay:(int)delay;
-- (void)showIndeterminateHud:(NSString *)text delay:(int)delay;
-- (void)hideHud;
-- (void)showSeaAlertViewWithDelegate:(id)delegate andMessage:(NSString *)str isWithCancelButton:(BOOL)isWithCancel;
-- (void)disMissAlertView;
-
-
 #pragma mark - readonly property 
 
 /**
  *  是否有效可见
  */
 - (BOOL)isVisible;
-
-/**
- *  获取状态栏高度
- *
- *  @return
- */
-- (CGFloat)statusBarHeight;
-
-/**
- *  获取NavigationBar高度
- *
- *  @return
- */
-- (CGFloat)navigationBarHeight;
-
-/**
- *  获取TabBar高度
- *
- *  @return
- */
-- (CGFloat)tabBarHeight;
-
-/**
- *  获取可显示内容高度
- *
- *  @return
- */
-- (CGFloat)contentHeight;
-
-/**
- *  获取可显示内容宽度，默认就是屏幕宽度
- */
-- (CGFloat)contentWidth;
 
 
 /**设置返回按钮

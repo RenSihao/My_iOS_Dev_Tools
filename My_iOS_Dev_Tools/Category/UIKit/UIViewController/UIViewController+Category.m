@@ -63,80 +63,6 @@ static char SeaHideTabBarKey;
 
 @implementation UIViewController (Category)
 
--(void)showTextHud:(NSString*)message
-{
-    [self showtextHUDWith:message andDelay:2.0];
-}
-
-- (void)showTextHudNoTab:(NSString *)message{
-    [self showtextHUDWith:message andDelay:2.0];
-}
-
-- (void)showTextHud:(NSString *)message delay:(int)delay{
-    [self showtextHUDWith:message andDelay:delay];
-}
-
--(void)showIndeterminateHud:(NSString *)text delay:(int)delay{
-    [self showHUD];
-    self.view.userInteractionEnabled = NO;;
-}
-
-- (void)showHUD{
-//    SeaNetworkActivityView *seaNet = [[SeaNetworkActivityView alloc] init];
-//    [self.view addSubview:seaNet];
-//    [self.view bringSubviewToFront:seaNet];
-}
-
-- (void)showtextHUDWith:(NSString *)msg andDelay:(int)delay{
-//    SeaPromptView *alertView = [[SeaPromptView alloc] initWithFrame:CGRectMake((self.view.width - SeaPromptViewWidth) / 2.0, (self.contentHeight - SeaPromptViewHeight) / 2.0, SeaPromptViewWidth, SeaPromptViewHeight) message:msg];
-//    [self.view addSubview:alertView];
-//    alertView.removeFromSuperViewAfterHidden = NO;
-//    alertView.messageLabel.text = msg;
-//    [self.view bringSubviewToFront:alertView];
-//    [alertView showAndHideDelay:delay];
-}
-
-- (void)hideHud{
-//    for (UIView *view in self.view.subviews) {
-//        if ([view isKindOfClass:[SeaNetworkActivityView class]]) {
-//            [view removeFromSuperview];
-//        }
-//        else if ([view isKindOfClass:[SeaPromptView class]]){
-//            [view removeFromSuperview];
-//        }
-//    }
-//    self.view.userInteractionEnabled = YES;
-}
-
-- (void)showSeaAlertViewWithDelegate:(id)delegate andMessage:(NSString *)str isWithCancelButton:(BOOL)isWithCancel{
-//    NSArray *buttonTitleArr;
-//    if (isWithCancel) {
-//        buttonTitleArr = @[@"取消",@"确定"];
-//    }
-//    else{
-//        buttonTitleArr = @[@"确定"];
-//    }
-//    SeaAlertView *alert = [[SeaAlertView alloc] initWithTitle:str otherButtonTitles:buttonTitleArr];
-//    alert.delegate = delegate;
-//    if (isWithCancel) {
-//        [alert setButtonTitleColor:kDefaultColor forIndex:1];
-//    }
-//    else{
-//        [alert setButtonTitleColor:kDefaultColor forIndex:0];
-//    }
-//    [alert show];
-}
-
-- (void)disMissAlertView{
-//    for (UIView *view in self.view.subviews) {
-//        if ([view isKindOfClass:[SeaAlertView class]]) {
-//            [(SeaAlertView *)view dismiss];
-//        }
-//    }
-}
-
-
-
 /**显示没有数据时的视图
  *@param hiden 是否显示
  *@param msg 提示的信息
@@ -187,53 +113,6 @@ static char SeaHideTabBarKey;
 {
     return ([self isViewLoaded] && self.view.window);
 }
-
-- (CGFloat)statusBarHeight
-{
-    return [UIApplication sharedApplication].statusBarFrame.size.height;
-}
-
-- (CGFloat)navigationBarHeight
-{
-    if (self.navigationController.navigationBarHidden)
-    {
-        return 0.f;
-    }
-    else
-    {
-        return BaseNavBarHeight;
-    }
-}
-- (CGFloat)tabBarHeight
-{
-    if (self.tabBarController.tabBar.isHidden)
-    {
-        return 0.f;
-    }
-    else
-    {
-        return BaseTabBarHeight;
-    }
-}
-- (CGFloat)contentHeight
-{
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    return screenHeight - self.statusBarHeight - self.navigationBarHeight - self.tabBarHeight;
-}
-- (CGFloat)contentWidth
-{
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    return screenWidth;
-}
-
-
-
-
-
-
-
-
-
 
 #pragma mark- back
 

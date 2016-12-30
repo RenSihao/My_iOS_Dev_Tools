@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^TapAction)();
 @interface UIView (Category)
 
 #pragma mark - frame
@@ -22,7 +23,13 @@
 
 @property (nonatomic, assign) CGPoint origin;
 @property (nonatomic, assign) CGSize  size;
+@property (nonatomic, assign, readonly) CGFloat bottomFromSuperView;
 
+//添加单击手势
+- (void)tapHandle:(TapAction)block;
+//添加抖动动画
+- (void)shakeView;
+- (void)shakeRotation:(CGFloat)rotation;
 
 //在原来的宽、高上加上一定的尺寸
 - (void)plusWidth:(CGFloat)width;

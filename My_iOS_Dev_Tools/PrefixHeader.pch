@@ -16,6 +16,7 @@
 /**
  *  本项目中，约定术语解释
  *  Base代表基类、基础、全局、通用、主要、通常、默认（相当于Global、General、Main等前缀）
+ *  VC即ViewController简写
  *
  *  tips：
  *  pch文件苹果不推荐使用，个人认为pch是把双刃剑，控制好使用频率和波及范围
@@ -37,7 +38,10 @@
 #import <Foundation/Foundation.h>
 
 /* 3rd  分为两种引用方式 一种是手动拖 一种是cocopods */
-
+#import <LxDBAnything/LxDBAnything.h>
+#import <ReactiveObjC/ReactiveObjC.h>
+#import <Masonry/Masonry.h>
+#import <MyLayout/MyLayout.h>
 
 
 #pragma mark - Macros
@@ -58,6 +62,7 @@
 #pragma mark - Category
 
 /* Foundation */
+#import "NSArray+YYAdd.h"
 #import "NSArray+Category.h"
 #import "NSDictionary+Category.h"
 #import "NSString+Category.h"

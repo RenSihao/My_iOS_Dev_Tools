@@ -62,6 +62,22 @@
     return YES;
 }
 
++ (NSString *)random64BitString
+{
+    char english[32];
+    
+    char number[32];
+    
+    for (int x=0;x<32;english[x++] = (char)('a' + (arc4random_uniform(26))));
+    
+    for (int x=0;x<32;number[x++] = (char)('0'+(arc4random_uniform(10))));
+    
+    NSString *englishBytes = [[NSString alloc] initWithBytes:english length:32 encoding:NSUTF8StringEncoding];
+    NSString *numberBytes = [[NSString alloc] initWithBytes:number length:32 encoding:NSUTF8StringEncoding];
+    
+    
+    return [englishBytes stringByAppendingString:numberBytes];
+}
 //中文编码
 + (NSString*)encodeStr:(NSString *)str
 {

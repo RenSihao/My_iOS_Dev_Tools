@@ -6,8 +6,11 @@
 //  Copyright © 2016年 RenSihao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <CYLTabBarController/CYLTabBarController.h>
 
-@interface BaseTabBarController : UITabBarController
+@interface BaseTabBarController : CYLTabBarController
+
++ ( instancetype)sharedInstance;
 
 @end
+

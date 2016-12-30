@@ -10,7 +10,11 @@
 
 @implementation UITableViewCell (Category)
 
--  (void)addLineForTop
++ (NSString *)identifier
+{
+    return NSStringFromClass(self.class);
+}
+- (void)addTopLine
 {
     UIView *line = [UIView new];
     line.backgroundColor = [UIColor grayColor];
@@ -18,7 +22,7 @@
     [self addSubview:line];
 }
 
-- (void)addLineForBottom
+- (void)addBottomLine
 {
     UIView *line = [UIView new];
     line.backgroundColor = [UIColor grayColor];

@@ -10,7 +10,8 @@
 
 @interface UITableViewCell (Category)
 
-- (void)addLineForTop;
-- (void)addLineForBottom;
++ (NSString *)identifier;
+- (void)addTopLine;
+- (void)addBottomLine;
 
 @end

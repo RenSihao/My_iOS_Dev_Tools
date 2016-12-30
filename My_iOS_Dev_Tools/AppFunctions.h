@@ -42,9 +42,18 @@ UIKIT_EXTERN UIColor *AppRGBColor(NSInteger r, NSInteger g, NSInteger b);
 UIKIT_EXTERN UIImage *AppImage(NSString *imageName);
 
 
-
-
-
+#pragma mark - 快捷方法
+UIKIT_EXTERN NSString *LocalFilePath(NSString *fileName);
+UIKIT_EXTERN void DeselectTableView(UITableView *tableView, NSIndexPath *indexPath);
+UIKIT_EXTERN NSUserDefaults *AppUserDefault();
+UIKIT_EXTERN void AppUserDefaultInteger(NSInteger value, NSString *key);
+UIKIT_EXTERN void AppUserDefaultString(NSString *value, NSString *key);
+UIKIT_EXTERN void AppUserDefaultBool(BOOL value, NSString *key);
+UIKIT_EXTERN UITableViewCell *DefaultCell(UITableView *tableView);
+UIKIT_EXTERN UIView *AppTableViewClearHeaderView();
+UIKIT_EXTERN UIView *AppTableViewClearFooterView();
+UIKIT_EXTERN UIEdgeInsets AppCellSeparateLineInsets();
+UIKIT_EXTERN UIWindow *AppKeyWindow();
 
 
 

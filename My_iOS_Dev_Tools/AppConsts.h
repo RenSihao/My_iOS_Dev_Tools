@@ -19,6 +19,7 @@ UIKIT_EXTERN NSString * const BaseEnglishFontName;
 
 #pragma mark - 颜色 (Hex)
 
+UIKIT_EXTERN NSString * const AppColor;
 UIKIT_EXTERN NSString * const BaseViewColor;
 UIKIT_EXTERN NSString * const BaseTableViewColor;
 UIKIT_EXTERN NSString * const BaseNavBarTintColor;

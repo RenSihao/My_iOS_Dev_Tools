@@ -178,7 +178,66 @@ UIImage *AppImage(NSString *imageName)
 }
 
 
+#pragma mark - 快捷方法
 
+UIKIT_EXTERN NSString *LocalFilePath(NSString *fileName)
+{
+    return [[NSBundle mainBundle] pathForResource:fileName ofType:nil] ? : @"";
+}
+void DeselectTableView(UITableView *tableView, NSIndexPath *indexPath)
+{
+    NSTimeInterval delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    });
+}
+NSUserDefaults *AppUserDefault()
+{
+    return [NSUserDefaults standardUserDefaults];
+}
+
+void AppUserDefaultInteger(NSInteger value, NSString *key)
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+void AppUserDefaultString(NSString *value, NSString *key)
+{
+    [[NSUserDefaults standardUserDefaults] setValue:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+void AppUserDefaultBool(BOOL value, NSString *key)
+{
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+UITableViewCell *DefaultCell(UITableView *tableView)
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+    return cell;
+}
+UIView *AppTableViewClearHeaderView()
+{
+    UIView *header = [UIView new];
+    header.userInteractionEnabled = NO;
+    return header;
+}
+UIView *AppTableViewClearFooterView()
+{
+    UIView *footer = [UIView new];
+    footer.userInteractionEnabled = NO;
+    return footer;
+}
+UIEdgeInsets AppCellSeparateLineInsets()
+{
+    return UIEdgeInsetsMake(0, 18.5, 0, 0);
+}
+UIWindow *AppKeyWindow()
+{
+    return [UIApplication sharedApplication].keyWindow;
+}
 
 
 

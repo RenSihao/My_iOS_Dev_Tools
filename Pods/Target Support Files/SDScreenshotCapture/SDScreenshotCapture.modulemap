@@ -1,0 +1,6 @@
+framework module SDScreenshotCapture {
+  umbrella header "SDScreenshotCapture-umbrella.h"
+
+  export *
+  module * { export * }
+}

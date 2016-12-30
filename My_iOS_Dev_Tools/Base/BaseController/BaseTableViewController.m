@@ -9,56 +9,57 @@
 #import "BaseTableViewController.h"
 
 @interface BaseTableViewController ()
-
-/**
- *  默认样式：系统palin风格
- */
-@property (nonatomic, assign) BaseTableViewStyle style;
+<
+UITableViewDelegate,
+UITableViewDataSource,
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
+>
 
 @end
 
 @implementation BaseTableViewController
 
 //.m文件同时重写set和get，需要@synthesize声明，否则语法报错
-@synthesize enableScroll   = _enableScroll;
 @synthesize enablePullDown = _enablePullDown;
 @synthesize enablePullUp   = _enablePullUp;
+@synthesize style          = _style;
 
 #pragma mark - init
 
 - (instancetype)init
 {
-    if (self = [super init])
-    {
+    if (self = [super init]){
+        
+        /* 基类tableview属性设置 子类继承可直接自行修改 */
+        
+        // plain风格
+        _style = UITableViewStylePlain;
+        
+        // 下拉刷新
+        _enablePullDown = YES;
+        
+        // 上拉加载 
+        _enablePullUp = NO;
         
     }
     return self;
 }
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder])
-    {
-        
+    if (self = [super initWithCoder:aDecoder]){
     }
     return self;
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
-    {
-        return [self initWithStyle:BaseTableViewStyleSystemPlain];
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
     }
     return self;
 }
-- (instancetype)initWithStyle:(BaseTableViewStyle)style
+- (void)dealloc
 {
-    if (self = [super init])
-    {
-        //...
-        self.style = style;
-        
-    }
-    return self;
+    //NSLog(@"%s", __func__);
 }
 
 #pragma mark - life cycle
@@ -67,214 +68,141 @@
 {
     [super viewDidLoad];
     
+    //1、 add tableView
+    [self.view addSubview:self.tableView];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 }
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
 }
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    
-    //使用AutoLayout布局，一般来说下写在这个方法内是最佳选择...
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
-    //此时需要将持有的对象置nil来释放内存...
-}
-- (void)dealloc
-{
-    
 }
 
+#pragma mark - setter (Public methods)
 
-#pragma mark - 初始化tableView的基本属性以及设置
-
-- (void)initialize
-{
-    [super initialize];
-    
-}
-- (void)initializeData
-{
-    [super initializeData];
-    
-}
-- (void)initializeUI
-{
-    [super initializeUI];
-    
-    
-}
-- (void)initializeNavigationBarAndItems
-{
-    [super initializeNavigationBarAndItems];
-    
-}
-
-#pragma mark - 下拉刷新 && 上拉加载 子类重写需调用super
-
-- (void)beginPullDownRefresh
-{
-    
-}
-- (void)beginPullUpLoadMore
-{
-    
-}
-- (void)endPullDownRefresh
-{
-    typeof(self) __weak weakSelf = self;
-    [self.tableView.mj_header endRefreshingWithCompletionBlock:^{
-        
-    }];
-}
-- (void)endPullUpLoadMore
-{
-    typeof(self) __weak weakSelf = self;
-    [self.tableView.mj_footer endRefreshingWithCompletionBlock:^{
-        
-    }];
-}
-
-#pragma mark - setter
-
-- (void)setEnableScroll:(BOOL)enableScroll
-{
-    if (self.enableScroll != enableScroll)
-    {
-        AppAssert(self.tableView, self, nil);
-        
-        self.enableScroll = enableScroll;
-        
-        if (self.enableScroll)
-        {
-            self.tableView.scrollEnabled = YES;
-        }
-        else
-        {
-            self.tableView.scrollEnabled = NO;
-        }
-    }
-}
 - (void)setEnablePullDown:(BOOL)enablePullDown
 {
-    if (self.enablePullDown != enablePullDown)
-    {
-        AppAssert(self.tableView, self, nil);
-        
-        self.enablePullDown = enablePullDown;
-        
-        if (self.enablePullDown)
-        {
-            typeof(self) __weak weakSelf = self;
-            
-            //初始化下拉刷新控件
-            self.tableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
-                
-                //进入刷新，执行对应方法
-                [weakSelf beginPullDownRefresh];
-            }];
-        }
-        else
-        {
-            [self.tableView.mj_header removeFromSuperview];
-        }
-        
+    if (_enablePullDown == enablePullDown) {
+        return ;
+    }
+    
+    AppAssert(self.tableView, self, nil);
+    _enablePullDown = enablePullDown;
+    if (_enablePullDown) {
+        self.tableView.mj_header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginPullDownRefresh)];
+    } else {
+        self.tableView.mj_header = nil;
     }
 }
 - (void)setEnablePullUp:(BOOL)enablePullUp
 {
-    if (self.enablePullUp != enablePullUp)
-    {
-        AppAssert(self.tableView, self, nil);
-        
-        self.enablePullUp = enablePullUp;
-        
-        if (self.enablePullUp)
-        {
-            typeof(self) __weak weakSelf = self;
-            
-            //初始化上拉加载控件
-            self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-                
-                //进入加载，执行对应方法
-                [weakSelf beginPullUpLoadMore];
-            }];
-        }
-        else
-        {
-            [self.tableView.mj_footer removeFromSuperview];
-        }
+    if (_enablePullUp == enablePullUp) {
+        return ;
+    }
+    
+    AppAssert(self.tableView, self, nil);
+    _enablePullUp = enablePullUp;
+    if (_enablePullUp) {
+        self.tableView.mj_footer = [MJRefreshFooter footerWithRefreshingTarget:self refreshingAction:@selector(beginPullUpLoadMore)];
+    } else {
+        self.tableView.mj_footer = nil;
     }
 }
+- (void)beginPullDownRefresh
+{
+}
+- (void)beginPullUpLoadMore
+{
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGFLOAT_MIN;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return CGFLOAT_MIN;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return AppTableViewClearHeaderView();
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return AppTableViewClearFooterView();
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[UITableViewCell identifier]];
+    return cell;
+}
+
 
 #pragma mark - getter
 
 - (UITableView *)tableView
 {
-    if (!_tableView)
-    {
-        CGRect frame = (CGRect)
-        {CGPointMake(0, 0),
-        CGSizeMake(self.contentWidth, self.contentHeight)};
+    if (!_tableView) {
+        CGRect frame = CGRectMake(0, 0, self.contentWidth, self.contentHeight);
+        _tableView = [[UITableView alloc] initWithFrame:frame style:_style];
         
-        _tableView = [[UITableView alloc] initWithFrame:frame];
+        // 基类tableview背景色
+        _tableView.backgroundColor = AppHexColor(BaseTableViewColor);
+        _tableView.delegate   = self;
+        _tableView.dataSource = self;
         
+        // empty view
+        _tableView.emptyDataSetSource   = self;
+        _tableView.emptyDataSetDelegate = self;
         
+        // 分割线风格
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        
+        // 下面两句代码没什么用，还是得靠具体cell自己设置 separatorInset 和 layoutMargins
+        _tableView.separatorInset = UIEdgeInsetsZero;
+        _tableView.layoutMargins  = UIEdgeInsetsZero;
+        
+        // register cell
+        [_tableView registerClass:[UITableViewCell class]
+           forCellReuseIdentifier:[UITableViewCell identifier]];
         
     }
     return _tableView;
-}
-- (BaseTableViewStyle)style
-{
-    if (!_style)
-    {
-        _style = BaseTableViewStyleSystemPlain;
-    }
-    return _style;
-}
-- (BOOL)enableScroll
-{
-    if (!_enableScroll)
-    {
-        _enableScroll = YES;
-    }
-    return _enableScroll;
-}
-- (BOOL)enablePullDown
-{
-    if (!_enablePullDown)
-    {
-        _enablePullDown = YES;
-    }
-    return _enablePullDown;
-}
-- (BOOL)enablePullUp
-{
-    if (!_enablePullUp)
-    {
-        _enablePullUp = NO;
-    }
-    return _enablePullUp;
 }
 
 

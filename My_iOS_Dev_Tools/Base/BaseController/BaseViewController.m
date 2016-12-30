@@ -17,15 +17,11 @@
 + (void)load
 {
     //Method Swizzle...
-    
 }
 + (void)initialize
 {
     //确保父类方法只执行一次
-    if (self == [BaseViewController class])
-    {
-        //...
-        
+    if (self == [BaseViewController class]) {
     }
 }
 
@@ -34,135 +30,93 @@
 //代码初始化
 - (instancetype)init
 {
-    if (self = [super init])
-    {
-        
+    if (self = [super init]){
     }
     return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder])
-    {
-        
+    if (self = [super initWithCoder:aDecoder]){
     }
     return self;
 }
 //xib或者归档初始化
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
-    {
-        
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
     }
     return self;
+}
+- (void)dealloc
+{
+    //NSLog(@"%s", __func__);
+    [self removeNotificationObservers];
+    [self removeSVP];
 }
 
 #pragma mark - life cycle
 
-//通常第一次访问到view时会走此方法，目的：生成controller的view
+//触发前提：代码初始化方式
+//通常第一次访问到view时会走此方法，目的：生成controller的view (即我们所谓的self.view就是这里生成的)
 - (void)loadView
 {
+    //系统帮我们生成view (0,20,width,height)
     [super loadView];
+    
+    //或者我们自己生成 (很少这样做)
+    //self.view = ...
 }
-
+//初始化时一些数据的设置
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    /**
-     *  tip： 与view相关的代码，尽可能放在viewDidLoad方法内，而不是init方法，否则容易有bug
-     */
-    
     //1、添加通知
     [self addNotificationObservers];
     
-    //2、初始化基本属性
-    [self initialize];
+    //2、加载UI控件
+    self.view.backgroundColor = AppHexColor(BaseViewColor);
     
-    //3、初始化数据
-    [self initializeData];
-    
-    //4、初始化UI
-    [self initializeUI];
-    
-    //5、初始化NavBar
-    [self initializeNavigationBarAndItems];
-    
+    //3、设置数据
 }
+//view 即将出现（每次view出现的时候都会调用）
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 }
+//初始化的时候，默认什么也不做。当view（包括subViews）的bounds发生变化的时候会调用，可以用来布局(Tip:此方法之后回调用updateViewConstraints)
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
 }
+//初始化的时候，默认什么也不做。注意当view（包括subViews）的bounds发生变化的时候会调用，可以用来布局。这里是bounds而不是frame。经过测试view的frame的size 发生变化才会调用该方法，而origin变化时不会调用
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
     //使用AutoLayout布局，一般来说下写在这个方法内是最佳选择...
 }
+//view已经全部展现出来(每次view出现的时候都会调用)
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
+//页面即将消失的时候调用（每次view即将消失的时候，都会调用）
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+}
+//页面已经消失的时候调用，(每次页面消失的时候都会调用)
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     
     //此时需要将持有的对象置nil来释放内存...
-}
-- (void)dealloc
-{
-    [self removeNotificationObservers];
-}
-
-#pragma mark - 初始化
-
-/**
- *  初始化基本属性（非数据、非UI的东西，例如某些功能属性的设置...）
- */
-- (void)initialize
-{
-    
-}
-/**
- *  初始化数据
- */
-- (void)initializeData
-{
-    
-}
-/**
- *  初始化UI（可以用来添加所有子控件）
- */
-- (void)initializeUI
-{
-    self.view.backgroundColor = AppHexColor(BaseViewColor);
-}
-/**
- *  初始化NavigationBar以及items相关属性，子类重写必须调用super
- */
-- (void)initializeNavigationBarAndItems
-{
-    if (self.navigationController.viewControllers.count > 1)
-    {
-        //定义全局返回按钮...
-        UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back-.-" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
-        
-        self.navigationItem.leftBarButtonItem = leftItem;
-    }
 }
 
 #pragma mark - 触发事件
@@ -172,16 +126,19 @@
  */
 - (void)goBack:(id)sender
 {
-    if (self.navigationController.viewControllers.count > 1)
-    {
+    if (self.navigationController.viewControllers.count > 1) {
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    else
-    {
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
-    }
+}
+
+#pragma mark - dealloc移除视图
+
+- (void)removeSVP
+{
+    // 批量销毁
+    [SVProgressHUD popActivity];
 }
 
 #pragma mark - 通知相关

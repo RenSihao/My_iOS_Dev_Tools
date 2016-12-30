@@ -15,11 +15,15 @@
 #define AppMacros_h
 
 //self弱引用
-#define WeakSelf(parameter)   typeof(self) __weak   weakSelf   = parameter;
+//#define WeakSelf(parameter)   typeof(self) __weak   weakSelf   = parameter;
 
 //self强引用
-#define StrongSelf(parameter) typeof(self) __strong strongSelf = parameter;
+//#define StrongSelf(parameter) typeof(self) __strong strongSelf = parameter;
 
+
+#pragma mark - 尺寸
+#define kScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #pragma mark - 颜色
 

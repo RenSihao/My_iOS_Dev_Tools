@@ -23,6 +23,12 @@
  */
 + (NSString*)encodeStr:(NSString *)str;
 
+/**
+ *  随机生成64为英文+数字的字符串
+ *
+ */
++ (NSString *)random64BitString;
+
 /*
  对指定的参数进行url编码
  入参sourceString 是希望进行编码的字符串
